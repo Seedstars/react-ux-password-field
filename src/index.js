@@ -44,7 +44,8 @@ var InputPassword = React.createClass({
       score: 0,
       entropy: 0,
       isPassword: true,
-      isValid: false
+      isValid: false,
+      toogleButtonText: ''
     }
   },
 
@@ -113,6 +114,16 @@ var InputPassword = React.createClass({
   handleChange(e) {
     e.preventDefault();
     var val = e.target.value;
+    
+    if (val == ''){
+      this.setState({
+        toogleButtonText: '',
+      });
+    } else{
+      this.setState({
+        toogleButtonText: 'Show',
+      });
+    }
 
     this.setState({
       value: val,
@@ -186,6 +197,15 @@ var InputPassword = React.createClass({
       })
     }
   },
+  
+  handleShowPassword: function () {
+    this.setState({
+      isPassword: !this.state.isPassword,
+      toogleButtonText: !this.state.isPassword ? 'Show' : 'Hide'
+    });
+    
+    
+  },
 
   componentWillMount() {
     var zxcvbnSrc;
@@ -239,14 +259,18 @@ var InputPassword = React.createClass({
           className="passwordField__input"
           type={this.state.isPassword ? 'password' : 'text'}
           value={this.state.value}
-          style={this.state.isPassword ? null : this.unMaskStyle}
           onChange={this.handleChange}
+          required={this.props.required}
           {...props}
         />
+        <a className="input-password-toggle" onClick={this.handleShowPassword}>{this.state.toogleButtonText}</a>
         {infoBar}
       </div>
     );
-  }
+  } /*
+  removed from input:           style={this.state.isPassword ? null : this.unMaskStyle} 
+  required={this.props.required} -- added 
+  */
 });
 
 module.exports = InputPassword;

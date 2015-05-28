@@ -5,6 +5,6 @@ module.exports =  {
   statusInactiveColor: '#FC6F6F',
   unMaskColor: '#c7c7c7',
   unMaskTime: 1400,
-  zxcvbnSrc: '../../lib/zxcvbn.js',
+  zxcvbnSrc: 'js/zxcvbn.js',
   strengthLang: ['Weak', 'Okay', 'Good', 'Strong', 'Great']
 }
