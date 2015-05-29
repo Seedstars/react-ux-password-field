@@ -34,7 +34,8 @@ var InputPassword = React.createClass({
       minScore: 0,
       toggleMask: true,
       unMaskTime: config.unMaskTime,
-      strengthLang: config.strengthLang
+      strengthLang: config.strengthLang,
+      unMaskStyle: confirm.unMaskStyle
     }
   },
 
@@ -64,12 +65,6 @@ var InputPassword = React.createClass({
       display: 'inline-block',
       marginRight: '1%'
     }
-  },
-
-  unMaskStyle: {
-    color: config.unMaskColor,
-    fontStyle: 'italic',
-    fontWeight: 200
   },
 
   infoStyle: {
@@ -121,7 +116,7 @@ var InputPassword = React.createClass({
       });
     } else{
       this.setState({
-        toogleButtonText: 'Show',
+        toogleButtonText: this.state.isPassword ? 'Show' : 'Hide' ,
       });
     }
 
@@ -201,7 +196,7 @@ var InputPassword = React.createClass({
   handleShowPassword: function () {
     this.setState({
       isPassword: !this.state.isPassword,
-      toogleButtonText: !this.state.isPassword ? 'Show' : 'Hide'
+      toogleButtonText: !this.state.isPassword ? 'Show' : 'Hide' 
     });
     
     
@@ -261,6 +256,7 @@ var InputPassword = React.createClass({
           value={this.state.value}
           onChange={this.handleChange}
           required={this.props.required}
+          style={this.state.isPassword ? null : this.props.unMaskStyle} 
           {...props}
         />
         <a className="input-password-toggle" onClick={this.handleShowPassword}>{this.state.toogleButtonText}</a>
@@ -268,7 +264,6 @@ var InputPassword = React.createClass({
       </div>
     );
   } /*
-  removed from input:           style={this.state.isPassword ? null : this.unMaskStyle} 
   required={this.props.required} -- added 
   */
 });
